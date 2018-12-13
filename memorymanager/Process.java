@@ -17,7 +17,7 @@ public class Process {
         return endTime;
     }
 
-    public double getSize() {
+    public int getSize() {
         return size;
     }
 
