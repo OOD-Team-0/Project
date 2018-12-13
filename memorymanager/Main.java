@@ -4,6 +4,8 @@ public class Main {
 
         System.out.println("Hello World");
 
+        View v = new View();
+
         //To shut up the errors
         FirstFit fifo = new FirstFit();
         MemoryEvent me = new MemoryEvent();
