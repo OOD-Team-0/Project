@@ -4,6 +4,8 @@ public class Main {
         int s = 1 + (int)(Math.random() * (20 - 1));
         System.out.println(s);
 
+        View v = new View();
+
         //To shut up the errors
         //FirstFit fifo = new FirstFit();
         //MemoryEvent me = new MemoryEvent();
