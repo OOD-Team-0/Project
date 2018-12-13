@@ -1,5 +1,3 @@
-package memorymanager;
-
 import java.util.Observable;
 
 public class OS extends Observable {
