@@ -1,5 +1,5 @@
+import java.util.ArrayList;
+
 public interface Scheduler {
-    public ProcessEvent getProcessEvents();
-
-
+    ArrayList<Process> getProcesses();
 }

@@ -1,45 +1,36 @@
 public class Process {
-    private String name;
-    private int time;
-    private double size;
+    private int pid;
+    private int endTime;
+    private int size;
 
-    public Process(String name, int time, double size) {
-        this.name = name;
-        this.time = time;
+    public Process(int pid, int endTime, int size) {
+        this.pid = pid;
+        this.endTime = endTime;
         this.size = size;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public int getPid() {
+        return this.pid;
     }
 
     public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
+        return endTime;
     }
 
     public double getSize() {
         return size;
     }
 
-    public void setSize(double size) {
-        this.size = size;
-    }
-
     @Override
     public String toString() {
         return "Process{" +
-                "name='" + name + '\'' +
-                ", time=" + time +
-                ", size=" + size +
+                "name='" + this.pid + '\'' +
+                ", time=" + this.endTime +
+                ", size=" + this.size +
                 '}';
     }
 
+    public boolean equals(Process p) {
+        return this.pid == p.getPid();
+    }
 }
