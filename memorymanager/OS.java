@@ -16,4 +16,10 @@ public class OS extends Observable {
     public void setScheduler() {
 
     }
+
+    //TODO: Fill in
+    public void setMemoryManagerAlgorithm(MemoryManagerAlgorithm m) {}
+
+    //TODO: Fill in
+    public void generateProcess() {}
 }
