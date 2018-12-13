@@ -5,11 +5,15 @@ public class Main {
         System.out.println("Hello World");
 
         //To shut up the errors
-        FIFO fifo = new FIFO();
+        FirstFit fifo = new FirstFit();
         MemoryEvent me = new MemoryEvent();
         MemoryManager mm = new MemoryManager();
         OS os = new OS();
-        Process p = new Process();
+
+        Process p = new Process("Process1",5,12.5);
+
         ProcessEvent pe = new ProcessEvent();
+
+
     }
 }
