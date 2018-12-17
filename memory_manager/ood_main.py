@@ -3,6 +3,7 @@ from ood_os import OS
 from ood_view import View
 from ood_memory_manager import MemoryManager
 from ood_first_fit import FirstFit
+from ood_fake_scheduler import FakeScheduler
 
 def main():
     sc = SimulationController()
