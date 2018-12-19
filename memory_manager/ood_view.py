@@ -140,7 +140,6 @@ class View(Observer):
         scale = self.MAXWIDTH / 100
         if whatToDo:
             # Have to add a button
-            print('here')
             b = Button()
             # Test Button
             # Things you will need
@@ -152,11 +151,9 @@ class View(Observer):
             b.place(x=bStartX,y=self.Y)
             self.gui.update()
             self.memoryButtons[pid]=b
-            print(str(self.memoryButtons))
         else:
             b = self.memoryButtons.get(pid)
             del self.memoryButtons[pid]
-            print(str(self.memoryButtons))
             b.destroy()
             self.gui.update()
 
