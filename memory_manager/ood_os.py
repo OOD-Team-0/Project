@@ -1,18 +1,14 @@
-from ood_memory_manager import MemoryManager
-from ood_scheduler import Scheduler
-from ood_view import View
+from ood_observable import Observable
 from time import sleep
 '''
 TODO
 '''
-
-
-class OS:
+class OS(Observable):
 
     def __init__(self):
+        super().__init__()
         self.memManager = None
         self.scheduler = None
-        self.view = None
 
     def setMemoryManager(self, memMan):
         self.memManager = memMan
@@ -30,5 +26,6 @@ class OS:
             processes = self.scheduler.getProcessEvents()
             for p in processes:
                 me = self.memManager.handleProcess(p)
-                self.view.update(me)
-            sleep(0.5)
+                if(me):
+                    self.notifyObservers(me)
+            sleep(1)

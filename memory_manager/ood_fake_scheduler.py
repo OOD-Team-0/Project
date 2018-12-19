@@ -1,16 +1,16 @@
 from ood_scheduler import Scheduler
+from ood_process import Process
 from time import time
 from random import randint
-from ood_process import Process
 
 
 class FakeScheduler(Scheduler):
 
     def __init__(self):
         self.MIN_SIZE = 1
-        self.MAX_SIZE = 5
-        self.MIN_TIME = 2
-        self.MAX_TIME = 5
+        self.MAX_SIZE = 10
+        self.MIN_TIME = 1
+        self.MAX_TIME = 10
 
         self.id = 1
 
@@ -24,6 +24,8 @@ class FakeScheduler(Scheduler):
         for p in self.processes:
             if(time() > p.endTime):
                 sendProcesses.append(p)
+        for p in sendProcesses:
+            self.processes.remove(p)
         if(time() > self.timeToGen):
             proc = self.generateProcess()
             sendProcesses.append(proc)
