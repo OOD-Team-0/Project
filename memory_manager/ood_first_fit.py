@@ -2,9 +2,19 @@ from ood_memory_management_algorithm import MemoryManagementAlgorithm
 
 
 class FirstFit(MemoryManagementAlgorithm):
+    """
+     First fit allocation algorithm, a process is allocated into main memory in the first sufficient index(es)
+     starting from the beginning of Main Memory
+    """
+
     def __init__(self): pass
 
     def addProcess(self, p, mm):
+        """
+        :param p: Process
+        :param mm: Main memory
+        :return: indexes at which the process was added to
+        """
         found = False
         index = -1
         while(not found and index < len(mm)):
@@ -24,5 +34,10 @@ class FirstFit(MemoryManagementAlgorithm):
         return None
 
     def removeProcess(self, p, mm):
+        """
+        :param p: Process
+        :param mm: Main Memory
+        :return: index(es) at which the process was removed
+        """
         return [i for i in range(len(mm)) if mm[i] == p.pid]
 
