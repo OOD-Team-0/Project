@@ -6,16 +6,22 @@ from ood_first_fit import FirstFit
 from ood_fake_scheduler import FakeScheduler
 
 def main():
+    memorySize = 100
     sc = SimulationController()
 
-    mm = MemoryManager(100)     # Controller can probably change this
-    mm.setMMA(FirstFit())
+    ff = FirstFit()
+    mm = MemoryManager(memorySize)     # Controller can probably change this
+    mm.setMMA(ff)
+    fs = FakeScheduler()
+
+    v = View(memorySize)
 
     os = OS()
     os.setMemoryManager(mm)
-    os.setScheduler(FakeScheduler())
-    os.setView(View())
+    os.setScheduler(fs)
+    os.addObserver(v)
 
     sc.setOS(os)
+    sc.setView(v)
 
 main()

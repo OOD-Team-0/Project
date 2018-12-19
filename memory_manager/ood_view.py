@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 from tkinter import *
+=======
+>>>>>>> 85f22a0782c3726371fa2166bbb5136141efc3db
 from ood_observer import Observer
 from random import randint
 
@@ -24,4 +27,23 @@ class View(Observer):
         else:
             s = 'Removed'
         print('Pid:{}, {}:{}'.format(me.pid, s ,me.indexes))
+<<<<<<< HEAD
         print(self.bar)
+=======
+        print(self.bar)
+
+
+#def randomAction(a):
+    #searching = True
+    #while(searching):
+        #i = randint(0,3)
+        #if(a[i] != None):
+            #searching = False
+    #return i
+
+#b = [1,1,None,1]
+
+#for i in range(50):
+   # print(randomAction(b))
+    
+>>>>>>> 85f22a0782c3726371fa2166bbb5136141efc3db
