@@ -1,5 +1,5 @@
-from tkinter import *
-from tkinter.ttk import *
+from tkinter import Tk, Label, IntVar, StringVar, HORIZONTAL, X
+from tkinter.ttk import Progressbar
 from ood_observer import Observer
 from random import randint
 from time import sleep
