@@ -21,11 +21,10 @@ class OS(Observable):
         self.view.setBarSize(len(self.memManager.mainMemory))
 
     def run(self):
-        print('running')
-        while(True):
-            processes = self.scheduler.getProcessEvents()
-            for p in processes:
-                me = self.memManager.handleProcess(p)
-                if(me):
-                    self.notifyObservers(me)
-            sleep(1)
+        processes = self.scheduler.getProcessEvents()
+        for p in processes:
+            me = self.memManager.handleProcess(p)
+            if(me):
+                self.notifyObservers(me)
+
+

@@ -7,10 +7,10 @@ from random import randint
 class FakeScheduler(Scheduler):
 
     def __init__(self):
-        self.MIN_SIZE = 1
+        self.MIN_SIZE = 2
         self.MAX_SIZE = 10
-        self.MIN_TIME = 1
-        self.MAX_TIME = 10
+        self.MIN_TIME = 5
+        self.MAX_TIME = 15
 
         self.id = 1
 
@@ -42,7 +42,7 @@ class FakeScheduler(Scheduler):
         return p
 
     def genProcessSize(self):
-        return randint(self.MIN_SIZE, self.MAX_SIZE + 1)
+        return randint(self.MIN_SIZE, self.MAX_SIZE)
 
     def genProcessTime(self):
         return time() + randint(self.MIN_TIME, self.MAX_TIME + 1)
