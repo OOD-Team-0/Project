@@ -10,10 +10,10 @@ class View(Observer):
         self.bar = [x*0 for x in range(size)]
         self.gui = Tk()
         self.gui.title("Memory Manager")
-        self.gui.geometry("500x250")
+        self.gui.geometry("500x300")
         self.gui.iconbitmap("ram.ico")
         # Label
-        self.progressBarLabel = Label(self.gui, text="Total Memory", font=("Roboto", 14))
+        self.progressBarLabel = Label(self.gui, text="Total Memory: " + str(size), font=("Roboto", 14))
         self.progressBarLabel.pack(padx=10, pady=10)
         # ProgessBar
         self.progressNum = IntVar()
@@ -33,6 +33,11 @@ class View(Observer):
         self.sizeLabel = Label(self.gui, textvariable=self.sizeString)
         self.sizeLabel.pack()
 
+        # Active Processes Label
+        self.activeString = StringVar()
+        self.activeLabel = Label(self.gui, textvariable=self.activeString, font=("Roboto", 14))
+        self.activeLabel.pack(padx=10, pady=10)
+
         # Start showing
         self.gui.update()
 
@@ -51,9 +56,14 @@ class View(Observer):
         print('Pid:{}, {}:{}'.format(me.pid, s ,me.indexes))
         print(self.bar)
         self.updateLabels(me.pid, s, me.indexes)
+        self.activeProcesses()
         self.updateProgressBar()
 
     def updateProgressBar(self):
+        # Fix for weird label glitch
+        self.percentageString.set('                                                                                     ')
+        self.gui.update_idletasks()
+
         totalSize = len(self.bar)
         spacesUsed = 0
         # In case size changes over 100, do percentage calc then make it an int again
@@ -62,18 +72,17 @@ class View(Observer):
                 spacesUsed = spacesUsed + 1
         percentage = spacesUsed/totalSize
         pbValue = int(percentage*100)
+        
+        # Update GUI
         self.progressNum.set(pbValue)
-        # Fix for weird label glitch
-        self.percentageString.set('')
-        self.gui.update_idletasks()
         self.percentageString.set(str(pbValue) + ' % Used')
         self.gui.update_idletasks()
         sleep(1)
 
     def updateLabels(self, pid, action, sizeArray):
         #clear the old strings
-        self.processString.set('')
-        self.sizeString.set('')
+        self.processString.set('                                                                                     ')
+        self.sizeString.set('                                                                                     ')
         self.gui.update_idletasks()
 
         if action == 'Added':
@@ -83,6 +92,24 @@ class View(Observer):
         self.processString.set(action + ' Process with ID: ' + str(pid) + ' ' + word + ' Memory')
 
         size = len(sizeArray)
-        self.sizeString.set('Size: ' + str(size))
 
+        # Update GUI
+        self.sizeString.set('Size: ' + str(size))
+        self.gui.update_idletasks()
+
+    def activeProcesses(self):
+        #clear the old strings
+        self.activeString.set('                                                                                     ')
+        self.gui.update_idletasks()
+
+        # Change to set (Removes dupes) - also remove 0 (means nothing is there)
+        barAsSet = set(self.bar)
+        barAsSet.remove(0)
+
+        if len(barAsSet) == 0:
+            barAsSet = 'None'
+
+        # Update GUI
+        uniqueProcesses = 'Active Processes: ' + str(barAsSet)
+        self.activeString.set(uniqueProcesses)
         self.gui.update_idletasks()
