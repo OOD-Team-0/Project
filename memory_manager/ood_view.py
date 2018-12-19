@@ -62,11 +62,19 @@ class View(Observer):
         percentage = spacesUsed/totalSize
         pbValue = int(percentage*100)
         self.progressNum.set(pbValue)
+        # Fix for weird label glitch
+        self.percentageString.set('')
+        self.gui.update_idletasks()
         self.percentageString.set(str(pbValue) + ' % Used')
         self.gui.update_idletasks()
         sleep(1)
 
     def updateLabels(self, pid, action, sizeArray):
+        #clear the old strings
+        self.processString.set('')
+        self.sizeString.set('')
+        self.gui.update_idletasks()
+
         if action == 'Added':
             word = 'to'
         else:
