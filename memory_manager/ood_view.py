@@ -32,7 +32,7 @@ class View(Observer):
         self.memoryButtons = {}
         self.photo = PhotoImage(file="FFFFFF-0.png")
         self.MAXWIDTH = 700
-        self.HEIGHT = 43
+        self.HEIGHT = 47
         self.STARTX=22
         self.Y=140
         # Test Button
