@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, IntVar, StringVar, HORIZONTAL, X
+from tkinter import Tk, Label, IntVar, StringVar, HORIZONTAL, X, Canvas, Button, PhotoImage
 from tkinter.ttk import Progressbar
 from ood_observer import Observer
 from random import randint
@@ -10,7 +10,7 @@ class View(Observer):
         self.bar = [x*0 for x in range(size)]
         self.gui = Tk()
         self.gui.title("Memory Manager")
-        self.gui.geometry("500x300")
+        self.gui.geometry("750x350")
         self.gui.iconbitmap("ram.ico")
         # Label
         self.progressBarLabel = Label(self.gui, text="Total Memory: " + str(size), font=("Roboto", 14))
@@ -24,14 +24,33 @@ class View(Observer):
         self.percentageString.set('0 % Used')
         self.percentageLabel = Label(self.gui, textvariable=self.percentageString, font=("Roboto", 14))
         self.percentageLabel.pack(padx=10, pady=10)
-        #Process Label
+        # Rectangle for Memory
+        self.canvas = Canvas(self.gui, width=706, height=50)
+        self.canvas.pack()
+        self.rectangle = self.canvas.create_rectangle(0,0,706,50,fill='green')
+
+        self.memoryButtons = {}
+        self.photo = PhotoImage(file="FFFFFF-0.png")
+        self.MAXWIDTH = 700
+        self.HEIGHT = 43
+        self.STARTX=22
+        self.Y=140
+        # Test Button
+        
+        self.testButton1 = Button(self.gui, image=self.photo)
+        self.testButton1['width']=self.MAXWIDTH
+        self.testButton1['height']=self.HEIGHT
+        self.testButton1.place(x=self.STARTX, y=self.Y)
+
+        # #Process Label
         self.processString = StringVar()
         self.processLabel = Label(self.gui, textvariable=self.processString, font=("Roboto", 14))
         self.processLabel.pack(padx=10, pady=(50,0))
-        #Size Label
+        # Size Label
         self.sizeString = StringVar()
         self.sizeLabel = Label(self.gui, textvariable=self.sizeString)
         self.sizeLabel.pack()
+        
 
         # Active Processes Label
         self.activeString = StringVar()
@@ -56,8 +75,10 @@ class View(Observer):
         print('Pid:{}, {}:{}'.format(me.pid, s ,me.indexes))
         print(self.bar)
         self.updateLabels(me.pid, s, me.indexes)
+        self.updateButtons(me.indexes, added, me.pid)
         self.activeProcesses()
         self.updateProgressBar()
+        
 
     def updateProgressBar(self):
         # Fix for weird label glitch
@@ -113,3 +134,31 @@ class View(Observer):
         uniqueProcesses = 'Active Processes: ' + str(barAsSet)
         self.activeString.set(uniqueProcesses)
         self.gui.update_idletasks()
+
+    def updateButtons(self, indexes, whatToDo, pid):
+        firstIndex = indexes[0]
+        scale = self.MAXWIDTH / 100
+        if whatToDo:
+            # Have to add a button
+            print('here')
+            b = Button()
+            # Test Button
+            # Things you will need
+            bWidth = scale * len(indexes)
+            bStartX = self.STARTX + (firstIndex * scale)
+            b = Button(self.gui, image=self.photo,bg='red')
+            b['width']=bWidth
+            b['height']=self.HEIGHT
+            b.place(x=bStartX,y=self.Y)
+            self.gui.update()
+            self.memoryButtons[pid]=b
+            print(str(self.memoryButtons))
+        else:
+            b = self.memoryButtons.get(pid)
+            del self.memoryButtons[pid]
+            print(str(self.memoryButtons))
+            b.destroy()
+            self.gui.update()
+
+
+
