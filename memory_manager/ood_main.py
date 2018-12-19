@@ -4,8 +4,11 @@ from ood_view import View
 from ood_memory_manager import MemoryManager
 from ood_first_fit import FirstFit
 from ood_fake_scheduler import FakeScheduler
+from tkinter import Tk
 
 def main():
+
+
     memorySize = 100
     sc = SimulationController()
 
@@ -23,5 +26,9 @@ def main():
 
     sc.setOS(os)
     sc.setView(v)
+    sc.start()
+    sc.run()
+
+
 
 main()
