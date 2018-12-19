@@ -47,7 +47,7 @@ class MemoryManager:
         """
         if(p in self.processQueue):
             self.processQueue.remove(p)
-        positions = self.mma.addProcess(p, self.mainMemory)
+        positions = self.mma.addProcess(p.pid, p.size, self.mainMemory)
         if(positions):
             for i in positions:
                 self.mainMemory[i] = p.pid
@@ -65,7 +65,7 @@ class MemoryManager:
 			:param	p
 			:return	MemoryEvent
         """
-        positions = self.mma.removeProcess(p, self.mainMemory)
+        positions = self.mma.removeProcess(p.pid, p.size, self.mainMemory)
         for i in positions:
             self.mainMemory[i] = 0
         if(len(self.processQueue) > 0):

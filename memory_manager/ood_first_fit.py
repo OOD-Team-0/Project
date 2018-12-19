@@ -9,7 +9,7 @@ class FirstFit(MemoryManagementAlgorithm):
 
     def __init__(self): pass
 
-    def addProcess(self, p, mm):
+    def addProcess(self, id, size, mm):
         """
         :param p: Process
         :param mm: Main memory
@@ -20,24 +20,24 @@ class FirstFit(MemoryManagementAlgorithm):
         while(not found and index < len(mm)):
             index += 1
             if(mm[index] == 0):
-                if((index + p.size < len(mm)) and all(x == 0 for x in mm[index:index + p.size])):
+                if((index + size < len(mm)) and all(x == 0 for x in mm[index:index + size])):
                     found = True
                 else:
-                    index += p.size - 1
+                    index += size - 1
         if(found):
             positions = []
-            for i in range(p.size):
-                mm[index + i] = p.pid
+            for i in range(size):
+                mm[index + i] = id
                 positions.append(index + i)
 
             return positions
         return None
 
-    def removeProcess(self, p, mm):
+    def removeProcess(self, id, size, mm):
         """
         :param p: Process
         :param mm: Main Memory
         :return: index(es) at which the process was removed
         """
-        return [i for i in range(len(mm)) if mm[i] == p.pid]
+        return [i for i in range(len(mm)) if mm[i] == id]
 

@@ -11,7 +11,7 @@ class MemoryManagementAlgorithm(ABC):
     :return: indexes at which the process was added to
     """
     @abstractmethod
-    def addProcess(self, p, mm): pass
+    def addProcess(self, id, size, mm): pass
 
     """
     :param p: Process
@@ -19,4 +19,4 @@ class MemoryManagementAlgorithm(ABC):
     :return: index(es) at which the process was removed
     """
     @abstractmethod
-    def removeProcess(self, p, mm): pass
+    def removeProcess(self, id, size, mm): pass
