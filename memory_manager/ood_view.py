@@ -11,6 +11,7 @@ class View(Observer):
         self.gui = Tk()
         self.gui.title("Memory Manager")
         self.gui.geometry("500x250")
+        self.gui.iconbitmap("ram.ico")
         # Label
         self.progressBarLabel = Label(self.gui, text="Total Memory", font=("Roboto", 14))
         self.progressBarLabel.pack(padx=10, pady=10)
