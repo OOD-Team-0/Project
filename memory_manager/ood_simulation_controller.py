@@ -38,7 +38,7 @@ class SimulationController:
         """
         while(self.running):
             self.os.run()
-            sleep(2)
+            sleep(1)
 
     def start(self):
         """

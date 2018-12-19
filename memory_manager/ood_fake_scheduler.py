@@ -14,10 +14,10 @@ class FakeScheduler(Scheduler):
 			Creates list of processes.
 			param: self
         """
-        self.MIN_SIZE = 2
+        self.MIN_SIZE = 5
         self.MAX_SIZE = 10
-        self.MIN_TIME = 5
-        self.MAX_TIME = 15
+        self.MIN_TIME = 10
+        self.MAX_TIME = 20
 
         self.id = 1
 
