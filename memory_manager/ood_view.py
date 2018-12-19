@@ -10,9 +10,9 @@ class View(Observer):
         self.bar = [x*0 for x in range(size)]
         self.gui = Tk()
         self.gui.title("Memory Manager")
-        self.gui.geometry("500x500")
+        self.gui.geometry("500x250")
         # Label
-        self.progressBarLabel = Label(self.gui, text="Total Memory")
+        self.progressBarLabel = Label(self.gui, text="Total Memory", font=("Roboto", 14))
         self.progressBarLabel.pack(padx=10, pady=10)
         # ProgessBar
         self.progressNum = IntVar()
@@ -21,8 +21,16 @@ class View(Observer):
         # Percentage Label
         self.percentageString = StringVar()
         self.percentageString.set('0 % Used')
-        self.percentageLabel = Label(self.gui, textvariable=self.percentageString)
+        self.percentageLabel = Label(self.gui, textvariable=self.percentageString, font=("Roboto", 14))
         self.percentageLabel.pack(padx=10, pady=10)
+        #Process Label
+        self.processString = StringVar()
+        self.processLabel = Label(self.gui, textvariable=self.processString, font=("Roboto", 14))
+        self.processLabel.pack(padx=10, pady=(50,0))
+        #Size Label
+        self.sizeString = StringVar()
+        self.sizeLabel = Label(self.gui, textvariable=self.sizeString)
+        self.sizeLabel.pack()
 
         # Start showing
         self.gui.update()
@@ -41,6 +49,7 @@ class View(Observer):
             s = 'Removed'
         print('Pid:{}, {}:{}'.format(me.pid, s ,me.indexes))
         print(self.bar)
+        self.updateLabels(me.pid, s, me.indexes)
         self.updateProgressBar()
 
     def updateProgressBar(self):
@@ -57,4 +66,14 @@ class View(Observer):
         self.gui.update_idletasks()
         sleep(1)
 
+    def updateLabels(self, pid, action, sizeArray):
+        if action == 'Added':
+            word = 'to'
+        else:
+            word = 'from'
+        self.processString.set(action + ' Process with ID: ' + str(pid) + ' ' + word + ' Memory')
 
+        size = len(sizeArray)
+        self.sizeString.set('Size: ' + str(size))
+
+        self.gui.update_idletasks()
