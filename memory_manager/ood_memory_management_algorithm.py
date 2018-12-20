@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 class MemoryManagementAlgorithm(ABC):
     """
-        This abstract class will be implemented by different types of memory allocation algorithms such as first fit, buddy system
-        best fit etc
+    This abstract class will be implemented by different types of memory allocation algorithms such as first fit, buddy system
+    best fit etc
     """
 
     """

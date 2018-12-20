@@ -1,6 +1,6 @@
 class MemoryEvent:
     """
-        Whenever a process is added or removed from main memory by the memory manager, a memory event will be created for record
+    Whenever a process is added or removed from main memory by the memory manager, a memory event will be created for record
     """
     def __init__(self, pid, indexes):
         """

@@ -3,8 +3,8 @@ from time import sleep
 
 class OS(Observable):
     """
-        Opearating System, responsible for tasks such as scheduling processes,
-        managing main memory and updating the view with essential data
+    Opearating System, responsible for tasks such as scheduling processes,
+    managing main memory and updating the view with essential data
     """
     def __init__(self):
         """

@@ -1,6 +1,6 @@
 class Observable:
     """
-        Subject(Observable) class, observers can register with this subject and receive all updated data
+    Subject(Observable) class, observers can register with this subject and receive all updated data
     """
     def __init__(self):
         """
