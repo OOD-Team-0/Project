@@ -2,18 +2,18 @@ from ood_memory_event import MemoryEvent
 
 class MemoryManager:
     """
-		Manages main memory based on specifications from a MemoryManagementAlgorithm (MMA).
-		MemoryManager sends references to main memory, processes, and a process queue to MMA
-		in order to allow the MemoryManagementAlgorithm to modify the values appropriately.
+    Manages main memory based on specifications from a MemoryManagementAlgorithm (MMA).
+    MemoryManager sends references to main memory, processes, and a process queue to MMA
+    in order to allow the MemoryManagementAlgorithm to modify the values appropriately.
     """
 	
     def __init__(self, memSize):
         """
-			Constructor for the MemoryManager.
-			Builds main memory based on specified memory size.
-			Creates process queue to hold processes that come in from OS.
-			:param	self
-			:param	memSize
+        Constructor for the MemoryManager.
+        Builds main memory based on specified memory size.
+        Creates process queue to hold processes that come in from OS.
+        :param	self
+        :param	memSize
         """
         self.mainMemory = [x*0 for x in range(memSize)]
         self.processQueue = []
@@ -25,10 +25,10 @@ class MemoryManager:
 
     def handleProcess(self, p):
         """
-			Handles an incoming process accordingly, based on mainMemory and processQueue.
-			:param	self
-			:param	p
-			:return	MemoryEvent, if process is in mainMemory then remove, else add process to mainMemory.
+        Handles an incoming process accordingly, based on mainMemory and processQueue.
+        :param	self
+        :param	p
+        :return	MemoryEvent, if process is in mainMemory then remove, else add process to mainMemory.
         """
         if(p.pid not in self.mainMemory):
             return self.addProcess(p)
@@ -38,12 +38,12 @@ class MemoryManager:
 
     def addProcess(self, p):
         """
-			If process (p) is in processQueue, remove.
-			Add process to mainMemory according to memoryManagementAlgorithm.
-			If not enough room in mainMemory, add process to processQueue.
-			:param	self
-			:param	p
-			:return	MemoryEvent
+		If process (p) is in processQueue, remove.
+		Add process to mainMemory according to memoryManagementAlgorithm.
+		If not enough room in mainMemory, add process to processQueue.
+		:param	self
+        :param	p
+        :return	MemoryEvent
         """
         if(p in self.processQueue):
             self.processQueue.remove(p)
@@ -59,11 +59,11 @@ class MemoryManager:
 
     def removeProcess(self, p):
         """
-			Remove process from mainMemory according to memoryManagementAlgorithm.
-			Then, attempt to add processes from the processQueue into mainMemory.
-			:param	self
-			:param	p
-			:return	MemoryEvent
+        Remove process from mainMemory according to memoryManagementAlgorithm.
+        Then, attempt to add processes from the processQueue into mainMemory.
+        :param	self
+        :param	p
+        :return	MemoryEvent
         """
         positions = self.mma.removeProcess(p.pid, p.size, self.mainMemory)
         for i in positions:
